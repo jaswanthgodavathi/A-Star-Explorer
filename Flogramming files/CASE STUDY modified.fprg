@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="ARUNKUMAR"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2021-12-31 08:31:07 PM"/>
+        <attribute name="created" value="QVJVTktVTUFSO0RFU0tUT1AtVko2TDdUNDsyMDIxLTEyLTMxOzA3OjI0OjM2IEFNOzMwMjE="/>
+        <attribute name="edited" value="QVJVTktVTUFSO0RFU0tUT1AtVko2TDdUNDsyMDIxLTEyLTMxOzA4OjMxOjA3IFBNOzI1OzMxOTU="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n, m, c, loop1, loop, des, a, size, obs, obsv, ids, colds, rods, pr, obsl" type="Integer" array="False" size=""/>
+            <output expression="&quot;ENTER THE SIZE OF  N  IN A  (N*N)  MATRIX&quot;" newline="True"/>
+            <input variable="n"/>
+            <declare name="array" type="Integer" array="True" size="n*n"/>
+            <declare name="arrayob" type="Integer" array="True" size="n*n"/>
+            <declare name="arraydes" type="String" array="True" size="n*n"/>
+            <assign variable="m" expression="n"/>
+            <assign variable="size" expression="-1"/>
+            <output expression="&quot;THE &quot;&amp;n&amp;&quot;*&quot;&amp;n&amp;&quot; MATRIX&quot;" newline="True"/>
+            <for variable="loop" start="0" end="n-1" direction="inc" step="1">
+                <comment text="STORING VALUES FOR MATRIX BASED ON THE VALUE N"/>
+                <assign variable="size" expression="size+1"/>
+                <for variable="loop1" start="1" end="m" direction="inc" step="1">
+                    <assign variable="array[size]" expression="size+1+10"/>
+                    <assign variable="arrayob[size]" expression="array[size]"/>
+                    <assign variable="arraydes[size]" expression="&quot;XX&quot;"/>
+                    <if expression="loop1==m">
+                        <then/>
+                        <else>
+                            <assign variable="size" expression="size+1"/>
+                        </else>
+                    </if>
+                </for>
+            </for>
+            <assign variable="size" expression="-1"/>
+            <for variable="loop" start="0" end="n-1" direction="inc" step="1">
+                <comment text="DISPLAYING THE INITIAL MATRIX VALUES"/>
+                <assign variable="size" expression="size+1"/>
+                <output expression="&quot;[  &quot;" newline="False"/>
+                <for variable="loop1" start="1" end="m" direction="inc" step="1">
+                    <output expression="array[size]" newline="False"/>
+                    <if expression="loop1==m">
+                        <then/>
+                        <else>
+                            <assign variable="size" expression="size+1"/>
+                            <output expression="&quot;,   &quot;" newline="False"/>
+                        </else>
+                    </if>
+                </for>
+                <output expression="&quot;  ]&quot;" newline="True"/>
+            </for>
+            <output expression="&quot;ENTER THE NUMBER OF OBSTACLES IN &quot;&amp; n&amp;&quot; x &quot;&amp;n&amp;&quot; MATRIX&quot;" newline="True"/>
+            <input variable="obs"/>
+            <if expression="obs&gt;(n*n)">
+                <then>
+                    <output expression="&quot;SORRY THE OBSTACLES ARE MORE THAN THE MATRIX AREA&quot;" newline="True"/>
+                    <assign variable="obsl" expression="-1"/>
+                </then>
+                <else>
+                    <assign variable="obsl" expression="1"/>
+                </else>
+            </if>
+            <if expression="obsl==1">
+                <then>
+                    <for variable="loop" start="0" end="obs-1" direction="inc" step="1">
+                        <comment text="STORING OBSTACLE VALUES AS 0 IN ANOTHER ARRAY"/>
+                        <output expression="&quot;ENTER THE VALUE OF OBSTACLE &quot;&amp;(loop+1)" newline="True"/>
+                        <input variable="obsv"/>
+                        <for variable="loop1" start="0" end="(n*n)-1" direction="inc" step="1">
+                            <if expression="arrayob[loop1]==obsv">
+                                <then>
+                                    <assign variable="arrayob[loop1]" expression="00"/>
+                                    <assign variable="arraydes[loop1]" expression="&quot;0&quot;"/>
+                                </then>
+                                <else/>
+                            </if>
+                        </for>
+                    </for>
+                </then>
+                <else/>
+            </if>
+            <output expression="&quot;ENTER THE DESTIATION VALUE&quot;" newline="True"/>
+            <input variable="des"/>
+            <assign variable="size" expression="-1"/>
+            <for variable="loop" start="0" end="n-1" direction="inc" step="1">
+                <comment text="STORING THE VALUES OF INDEX,ROW AND COLUMN OF DESTINATION"/>
+                <assign variable="size" expression="size+1"/>
+                <for variable="loop1" start="1" end="m" direction="inc" step="1">
+                    <if expression="arrayob[size]==des">
+                        <then>
+                            <assign variable="arraydes[size]" expression="&quot;D&quot;"/>
+                            <assign variable="ids" expression="size"/>
+                            <assign variable="colds" expression="loop1"/>
+                            <assign variable="rods" expression="loop+1"/>
+                        </then>
+                        <else/>
+                    </if>
+                    <if expression="loop1==m">
+                        <then/>
+                        <else>
+                            <assign variable="size" expression="size+1"/>
+                        </else>
+                    </if>
+                </for>
+            </for>
+            <if expression="des&gt;(n*n)+10||des&lt;11">
+                <then>
+                    <output expression="&quot;SORRY! DESTINATION GIVEN OUT OF MATRIX&quot;" newline="True"/>
+                    <assign variable="a" expression="0"/>
+                </then>
+                <else>
+                    <assign variable="a" expression="1"/>
+                </else>
+            </if>
+            <if expression="a==1">
+                <then>
+                    <comment text="PROCESSING THE MATRIX TO FIND A SUITABLE PATH"/>
+                    <if expression="arrayob[1]==00&amp;&amp;arrayob[n]==00">
+                        <then>
+                            <output expression="&quot;SORRY YOU HAVE BEEN BLOCKED BY OBSTACLES&quot;" newline="True"/>
+                        </then>
+                        <else>
+                            <output expression="&quot;PLEASE WAIT WHILE PROCESSING A SUITABLE PATH&quot;" newline="True"/>
+                            <declare name="rd1, cd1, rd2, cd2" type="Integer" array="False" size=""/>
+                            <declare name="t" type="Integer" array="False" size=""/>
+                            <assign variable="rd1" expression="0"/>
+                            <assign variable="cd1" expression="0"/>
+                            <if expression="rods&gt;colds">
+                                <then>
+                                    <assign variable="c" expression="-1"/>
+                                </then>
+                                <else>
+                                    <assign variable="c" expression="-n"/>
+                                </else>
+                            </if>
+                            <assign variable="t" expression="-1"/>
+                            <assign variable="arraydes[0]" expression="&quot;1&quot;"/>
+                            <for variable="loop" start="0" end="ids" direction="inc" step="1">
+                                <if expression="rods&gt;colds">
+                                    <then>
+                                        <if expression="c==ids">
+                                            <then>
+                                                <if expression="t&lt;0">
+                                                    <then>
+                                                        <output expression="&quot;BINGO! FOUND YOUR PATH&quot;" newline="True"/>
+                                                        <assign variable="t" expression="1"/>
+                                                    </then>
+                                                    <else/>
+                                                </if>
+                                            </then>
+                                            <else>
+                                                <assign variable="cd1" expression="cd1+1"/>
+                                                <assign variable="c" expression="c+1"/>
+                                                <assign variable="arraydes[c]" expression="&quot;11&quot;"/>
+                                            </else>
+                                        </if>
+                                        <if expression="cd1==colds">
+                                            <then>
+                                                <assign variable="colds" expression="rods+colds+1"/>
+                                            </then>
+                                            <else/>
+                                        </if>
+                                    </then>
+                                    <else>
+                                        <if expression="c==ids">
+                                            <then>
+                                                <if expression="t&lt;0">
+                                                    <then>
+                                                        <output expression="&quot;BINGO! FOUND YOUR PATH&quot;" newline="True"/>
+                                                        <assign variable="t" expression="1"/>
+                                                    </then>
+                                                    <else/>
+                                                </if>
+                                            </then>
+                                            <else>
+                                                <assign variable="rd1" expression="rd1+1"/>
+                                                <assign variable="c" expression="c+n"/>
+                                                <assign variable="arraydes[c]" expression="&quot;11&quot;"/>
+                                            </else>
+                                        </if>
+                                        <if expression="rd1==rods">
+                                            <then>
+                                                <assign variable="rods" expression="rods+colds"/>
+                                            </then>
+                                            <else/>
+                                        </if>
+                                    </else>
+                                </if>
+                            </for>
+                        </else>
+                    </if>
+                </then>
+                <else/>
+            </if>
+            <assign variable="size" expression="-1"/>
+            <assign variable="arraydes[ids]" expression="&quot;DD&quot;"/>
+            <for variable="loop" start="0" end="n-1" direction="inc" step="1">
+                <comment text="DISPLAYING THE OUTPUT MATRIX VALUES WITH PATH"/>
+                <assign variable="size" expression="size+1"/>
+                <output expression="&quot;[  &quot;" newline="False"/>
+                <for variable="loop1" start="1" end="m" direction="inc" step="1">
+                    <output expression="arraydes[size]" newline="False"/>
+                    <if expression="loop1==m">
+                        <then/>
+                        <else>
+                            <assign variable="size" expression="size+1"/>
+                            <output expression="&quot;,   &quot;" newline="False"/>
+                        </else>
+                    </if>
+                </for>
+                <output expression="&quot;  ]&quot;" newline="True"/>
+            </for>
+        </body>
+    </function>
+</flowgorithm>

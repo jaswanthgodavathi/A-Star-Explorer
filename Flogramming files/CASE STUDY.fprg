@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="ARUNKUMAR"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2021-12-31 10:03:05 AM"/>
+        <attribute name="created" value="QVJVTktVTUFSO0RFU0tUT1AtVko2TDdUNDsyMDIxLTEyLTMxOzA3OjI0OjM2IEFNOzMwMjE="/>
+        <attribute name="edited" value="QVJVTktVTUFSO0RFU0tUT1AtVko2TDdUNDsyMDIxLTEyLTMxOzEwOjAzOjA1IEFNOzg7MzEyMw=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n, m, loop1, loop, loop2, a, size, obs" type="Integer" array="False" size=""/>
+            <output expression="&quot;ENTER THE SIZE OF N IN A N*N MATRIX&quot;" newline="True"/>
+            <input variable="n"/>
+            <declare name="array" type="Integer" array="True" size="n*n"/>
+            <declare name="arrayob" type="Integer" array="True" size="n*n"/>
+            <assign variable="m" expression="n"/>
+            <assign variable="size" expression="-1"/>
+            <for variable="loop" start="0" end="n-1" direction="inc" step="1">
+                <if expression="loop%n==0">
+                    <then>
+                        <assign variable="a" expression="1"/>
+                    </then>
+                    <else/>
+                </if>
+                <assign variable="size" expression="size+1"/>
+                <for variable="loop1" start="1" end="m" direction="inc" step="1">
+                    <output expression="&quot;ENTER THE VALUE OF MATRIX1 ELEMENT [ &quot;&amp; a &amp;&quot; ,&quot;&amp; loop1 &amp;&quot; ]&quot;" newline="True"/>
+                    <input variable="array[size]"/>
+                    <assign variable="arrayob[size]" expression="array[size]"/>
+                    <if expression="loop1==m">
+                        <then/>
+                        <else>
+                            <assign variable="size" expression="size+1"/>
+                        </else>
+                    </if>
+                </for>
+                <assign variable="a" expression="a+1"/>
+            </for>
+            <assign variable="size" expression="-1"/>
+            <for variable="loop" start="0" end="n-1" direction="inc" step="1">
+                <if expression="loop%n==0">
+                    <then>
+                        <assign variable="a" expression="1"/>
+                    </then>
+                    <else/>
+                </if>
+                <assign variable="size" expression="size+1"/>
+                <output expression="&quot;[ &quot;" newline="False"/>
+                <for variable="loop1" start="1" end="m" direction="inc" step="1">
+                    <output expression="array[size]" newline="False"/>
+                    <if expression="loop1==m">
+                        <then/>
+                        <else>
+                            <assign variable="size" expression="size+1"/>
+                            <output expression="&quot;,  &quot;" newline="False"/>
+                        </else>
+                    </if>
+                </for>
+                <output expression="&quot; ]&quot;" newline="True"/>
+                <assign variable="a" expression="a+1"/>
+            </for>
+            <output expression="&quot;ENTER THE NUMBER OF OBSTACLES IN &quot;&amp; n&amp;&quot; x &quot;&amp;n&amp;&quot; MATRIX&quot;" newline="True"/>
+            <input variable="obs"/>
+            <output expression="&quot;EXAMPLE FOR DEFINING THE POSIION OF THE OBSTACLE&quot;" newline="True"/>
+            <output expression="&quot;'21' TO REFER POSITION [2,1]&quot;" newline="True"/>
+            <for variable="loop" start="0" end="obs-1" direction="inc" step="1">
+                <output expression="&quot;ENTER THE POSITION OF OBSTACLE &quot;&amp;(loop+1)" newline="True"/>
+                <for variable="loop1" start="0" end="(n*n)-1" direction="inc" step="1">
+                    <if expression="">
+                        <then/>
+                        <else/>
+                    </if>
+                </for>
+                <if expression="loop%n==0">
+                    <then>
+                        <assign variable="a" expression="0"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+        </body>
+    </function>
+</flowgorithm>

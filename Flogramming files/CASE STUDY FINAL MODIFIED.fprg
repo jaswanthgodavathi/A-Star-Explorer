@@ -1,0 +1,296 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="ARUNKUMAR"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2022-02-07 11:04:49 AM"/>
+        <attribute name="created" value="QVJVTktVTUFSO0RFU0tUT1AtVko2TDdUNDsyMDIyLTAxLTI0OzExOjE4OjE2IFBNOzMwMzM="/>
+        <attribute name="edited" value="QVJVTktVTUFSO0RFU0tUT1AtVko2TDdUNDsyMDIyLTAxLTI1OzA1OjAwOjQ1IFBNOzEzO0FSVU5LVU1BUjtERVNLVE9QLVZKNkw3VDQ7MjAyMS0xMi0zMTswNzoyNDozNiBBTTtDQVNFIFNUVURZIG1vZGlmaWVkIDEuZnByZzs4NDc2"/>
+        <attribute name="edited" value="QVJVTktVTUFSO0RFU0tUT1AtVko2TDdUNDsyMDIyLTAyLTA3OzExOjA0OjQ5IEFNOzc3OzMxOTA="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <output expression="&quot;ENTER THE SIZE OF N IN A (N*N) MATRIX&quot;" newline="True"/>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <input variable="n"/>
+            <if expression="n==1">
+                <then>
+                    <output expression="&quot;PLS ENTER VALUE EXCEPT 1&quot;" newline="True"/>
+                    <input variable="n"/>
+                </then>
+                <else/>
+            </if>
+            <declare name="array" type="Integer" array="True" size="n*n"/>
+            <declare name="arrayob" type="Integer" array="True" size="n*n"/>
+            <declare name="arraydes" type="String" array="True" size="n*n"/>
+            <call expression="CreatingArray(array,arrayob,arraydes,n)"/>
+            <call expression="DisplayArray(array,n)"/>
+            <output expression="&quot;ENTER THE NUMBER OF OBSTACLES IN &quot;&amp; n&amp;&quot; x &quot;&amp;n&amp;&quot; MATRIX&quot;" newline="True"/>
+            <declare name="obs" type="Integer" array="False" size=""/>
+            <input variable="obs"/>
+            <call expression="Creatingob(arrayob,arraydes,obs,n)"/>
+            <output expression="&quot;ENTER THE DESTIATION VALUE&quot;" newline="True"/>
+            <declare name="des" type="Integer" array="False" size=""/>
+            <input variable="des"/>
+            <declare name="arrayval" type="Integer" array="True" size="4"/>
+            <call expression="DesArray(arrayob,arraydes,arrayval,des,n)"/>
+            <declare name="cases" type="Boolean" array="False" size=""/>
+            <assign variable="cases" expression="blockedcase(arrayval,arrayob,n)"/>
+            <call expression="DisplayArrayString(arraydes,n)"/>
+        </body>
+    </function>
+    <function name="blockedcase" type="Boolean" variable="condition">
+        <parameters>
+            <parameter name="ArrayVal" type="Integer" array="True"/>
+            <parameter name="arrayob" type="Integer" array="True"/>
+            <parameter name="N" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="f, g, condition" type="Boolean" array="False" size=""/>
+            <declare name="ids" type="Integer" array="False" size=""/>
+            <assign variable="ids" expression="ArrayVal[0]"/>
+            <if expression="ids+1%5==0">
+                <then>
+                    <assign variable="f" expression="True"/>
+                </then>
+                <else>
+                    <if expression="ids+1&gt;=n*n">
+                        <then>
+                            <assign variable="f" expression="True"/>
+                        </then>
+                        <else>
+                            <assign variable="f" expression="arrayob[ids+1]==00"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+            <if expression="ids&gt;n">
+                <then>
+                    <if expression="ids+1&gt;=n*n">
+                        <then>
+                            <assign variable="g" expression="False"/>
+                        </then>
+                        <else>
+                            <assign variable="g" expression="(arrayob[ids-1]==00&amp;&amp;arrayob[ids-n]==00)&amp;&amp;arrayob[ids+1]&gt;=n*n||(arrayob[ids-1]==00&amp;&amp;arrayob[ids+n]==00&amp;&amp;arrayob[ids-n]==00&amp;&amp;f)"/>
+                        </else>
+                    </if>
+                </then>
+                <else>
+                    <assign variable="g" expression="False"/>
+                </else>
+            </if>
+            <assign variable="condition" expression="(arrayob[1]==00&amp;&amp;arrayob[n]==00)||g"/>
+            <comment text="PROCESSING THE MATRIX TO FIND A SUITABLE PATH"/>
+        </body>
+    </function>
+    <function name="CreatingArray" type="None" variable="">
+        <parameters>
+            <parameter name="Array" type="Integer" array="True"/>
+            <parameter name="ArrayOb" type="Integer" array="True"/>
+            <parameter name="ArrayDes" type="String" array="True"/>
+            <parameter name="N" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="q, m, loop, loop1, size" type="Integer" array="False" size=""/>
+            <assign variable="m" expression="N"/>
+            <assign variable="q" expression="N"/>
+            <assign variable="size" expression="-1"/>
+            <output expression="&quot;THE &quot;&amp;N&amp;&quot; * &quot;&amp;N&amp;&quot; MATRIX&quot;" newline="True"/>
+            <for variable="loop" start="0" end="q-1" direction="inc" step="1">
+                <comment text="STORING VALUES FOR MATRIX BASED ON THE VALUE N"/>
+                <assign variable="size" expression="size+1"/>
+                <for variable="loop1" start="1" end="m" direction="inc" step="1">
+                    <assign variable="Array[size]" expression="size+1+10"/>
+                    <assign variable="ArrayOb[size]" expression="Array[size]"/>
+                    <assign variable="ArrayDes[size]" expression="&quot;XX&quot;"/>
+                    <if expression="loop1==m">
+                        <then/>
+                        <else>
+                            <assign variable="size" expression="size+1"/>
+                        </else>
+                    </if>
+                </for>
+            </for>
+        </body>
+    </function>
+    <function name="Creatingob" type="None" variable="">
+        <parameters>
+            <parameter name="ArrayOb" type="Integer" array="True"/>
+            <parameter name="ArrayDes" type="String" array="True"/>
+            <parameter name="Obs" type="Integer" array="False"/>
+            <parameter name="N" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="Obsl, loop, obsv, loop1" type="Integer" array="False" size=""/>
+            <if expression="Obs&gt;=(n*n)-1">
+                <then>
+                    <output expression="&quot;SORRY THE OBSTACLES ARE MORE THAN OR EQUAL TO THE MATRIX AREA&quot;" newline="True"/>
+                    <assign variable="Obsl" expression="-1"/>
+                </then>
+                <else>
+                    <assign variable="Obsl" expression="1"/>
+                </else>
+            </if>
+            <if expression="Obsl==1">
+                <then>
+                    <for variable="loop" start="0" end="Obs-1" direction="inc" step="1">
+                        <comment text="STORING OBSTACLE VALUES AS 0 IN ANOTHER ARRAY"/>
+                        <output expression="&quot;ENTER THE VALUE OF OBSTACLE &quot;&amp;(loop+1)" newline="True"/>
+                        <input variable="obsv"/>
+                        <if expression="ArrayOb[0]==obsv">
+                            <then>
+                                <output expression="&quot;SORRY YOU CANT GIVE THE INITIAL POINT AS OBSACLE&quot;" newline="True"/>
+                            </then>
+                            <else/>
+                        </if>
+                        <if expression="obsv&gt;(n*n)+10||obsv&lt;11">
+                            <then>
+                                <output expression="&quot;SORRY.. PLS GIVE THE VALUE PRESENT IN THE MATRIX&quot;" newline="True"/>
+                            </then>
+                            <else/>
+                        </if>
+                        <for variable="loop1" start="1" end="(N*N)-1" direction="inc" step="1">
+                            <if expression="ArrayOb[loop1]==obsv">
+                                <then>
+                                    <assign variable="ArrayOb[loop1]" expression="00"/>
+                                    <assign variable="ArrayDes[loop1]" expression="&quot;00&quot;"/>
+                                </then>
+                                <else/>
+                            </if>
+                        </for>
+                    </for>
+                </then>
+                <else/>
+            </if>
+        </body>
+    </function>
+    <function name="DesArray" type="None" variable="A,columndes,rowdes">
+        <parameters>
+            <parameter name="ArrayOb" type="Integer" array="True"/>
+            <parameter name="ArrayDes" type="String" array="True"/>
+            <parameter name="ArrayVal" type="Integer" array="True"/>
+            <parameter name="Des" type="Integer" array="False"/>
+            <parameter name="N" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="loop, size, loop1, m, Indexdes, columndes, rowdes, a" type="Integer" array="False" size=""/>
+            <assign variable="m" expression="N"/>
+            <assign variable="size" expression="-1"/>
+            <for variable="loop" start="0" end="n-1" direction="inc" step="1">
+                <comment text="STORING THE VALUES OF INDEX,ROW AND COLUMN OF DESTINATION"/>
+                <assign variable="size" expression="size+1"/>
+                <for variable="loop1" start="1" end="m" direction="inc" step="1">
+                    <if expression="Arrayob[size]==Des">
+                        <then>
+                            <assign variable="arraydes[size]" expression="&quot;D&quot;"/>
+                            <assign variable="Indexdes" expression="size"/>
+                            <assign variable="columndes" expression="loop1"/>
+                            <assign variable="rowdes" expression="loop+1"/>
+                        </then>
+                        <else/>
+                    </if>
+                    <if expression="loop1==m">
+                        <then/>
+                        <else>
+                            <assign variable="size" expression="size+1"/>
+                        </else>
+                    </if>
+                </for>
+            </for>
+            <if expression="Des&gt;(n*n)+10||Des&lt;11">
+                <then>
+                    <output expression="&quot;SORRY! DESTINATION GIVEN OUT OF MATRIX&quot;" newline="True"/>
+                    <assign variable="a" expression="0"/>
+                </then>
+                <else>
+                    <assign variable="a" expression="1"/>
+                </else>
+            </if>
+            <assign variable="ArrayVal[0]" expression="indexdes"/>
+            <comment text="ARRAY4[0] = INDEX OF DESTINATION"/>
+            <assign variable="ArrayVal[1]" expression="columndes"/>
+            <comment text="ARRAY4[1] = COLUMN OF DESTINATION"/>
+            <assign variable="ArrayVal[2]" expression="rowdes"/>
+            <comment text="ARRAY4[2] = ROW OF DESTINATION"/>
+            <assign variable="ArrayVal[3]" expression="a"/>
+            <comment text="CONDITION TO RUN FURTHER PROGRAM"/>
+        </body>
+    </function>
+    <function name="DisplayArray" type="None" variable="">
+        <parameters>
+            <parameter name="ARRAY" type="Integer" array="True"/>
+            <parameter name="N" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="q, m, loop, loop1, size" type="Integer" array="False" size=""/>
+            <assign variable="m" expression="N"/>
+            <assign variable="q" expression="N"/>
+            <assign variable="size" expression="-1"/>
+            <for variable="loop" start="0" end="n-1" direction="inc" step="1">
+                <comment text="DISPLAYING THE INITIAL MATRIX VALUES"/>
+                <assign variable="size" expression="size+1"/>
+                <output expression="&quot;[  &quot;" newline="False"/>
+                <for variable="loop1" start="1" end="m" direction="inc" step="1">
+                    <output expression="ARRAY[size]" newline="False"/>
+                    <if expression="loop1==m">
+                        <then/>
+                        <else>
+                            <assign variable="size" expression="size+1"/>
+                            <output expression="&quot;,   &quot;" newline="False"/>
+                        </else>
+                    </if>
+                </for>
+                <output expression="&quot;  ]&quot;" newline="True"/>
+            </for>
+        </body>
+    </function>
+    <function name="DisplayArrayString" type="None" variable="">
+        <parameters>
+            <parameter name="Array" type="String" array="True"/>
+            <parameter name="N" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="q, m, loop, loop1, size" type="Integer" array="False" size=""/>
+            <assign variable="m" expression="N"/>
+            <assign variable="q" expression="N"/>
+            <assign variable="size" expression="-1"/>
+            <for variable="loop" start="0" end="n-1" direction="inc" step="1">
+                <comment text="DISPLAYING THE INITIAL MATRIX VALUES"/>
+                <assign variable="size" expression="size+1"/>
+                <output expression="&quot;[  &quot;" newline="False"/>
+                <for variable="loop1" start="1" end="m" direction="inc" step="1">
+                    <output expression="ARRAY[size]" newline="False"/>
+                    <if expression="loop1==m">
+                        <then/>
+                        <else>
+                            <assign variable="size" expression="size+1"/>
+                            <output expression="&quot;,   &quot;" newline="False"/>
+                        </else>
+                    </if>
+                </for>
+                <output expression="&quot;  ]&quot;" newline="True"/>
+            </for>
+        </body>
+    </function>
+    <function name="findingpath" type="None" variable="">
+        <parameters>
+            <parameter name="Condition" type="Boolean" array="False"/>
+            <parameter name="ArrayVal" type="Integer" array="True"/>
+        </parameters>
+        <body>
+            <if expression="arrayval[3]==1">
+                <then>
+                    <if expression="Condition">
+                        <then>
+                            <output expression="&quot;SORRY YOU HAVE BEEN BLOCKED BY OBSTACLES&quot;" newline="True"/>
+                        </then>
+                        <else/>
+                    </if>
+                </then>
+                <else/>
+            </if>
+        </body>
+    </function>
+</flowgorithm>
